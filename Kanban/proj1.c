@@ -165,9 +165,9 @@ void list_tasks_in_activity(){
         Print format for each task: <id> <start> <description>
     */
 
-    int orderedTaskCount, tmpTasksCount = 0, tmpStartTime = -1, i;
+    int orderedTaskCount, tmpStartTime, i, rightFlag = -1, leftFlag = 0;
     char input[MAX_INPUT] = {'\0'}, activityInp[MAX_ACTIVITY_CHR] = {'\0'};
-    Task orderedTasks[MAX_TASK], tmpTasks[MAX_TASK]; 
+    Task orderedTasks[MAX_TASK]; 
 
     fgets(input, MAX_INPUT, stdin);
     sscanf(input, " %20[^\n]", activityInp);
@@ -176,24 +176,22 @@ void list_tasks_in_activity(){
         orderedTaskCount = filter_by_activity(orderedTasks, tasks, taskCount, activityInp);
         sort(orderedTasks, 0, orderedTaskCount - 1, start_sort);
         /* 
-           This loop will search for tasks that start at the same time, save them in a temporary 
-           array, sort the array by the descriptions' alphabetical order, and then print it.
+           This loop will look for tasks that begin at the same time, set the leftFlag to the first 
+           one and the rightFlag to the last one, sort the array by the descriptions' alphabetical 
+           order between the flags, and print it.
         */
+        tmpStartTime = orderedTasks[0].start;
         for(i = 0; i < orderedTaskCount; ++i){
-            if(tmpStartTime == -1)
+            if(orderedTasks[i].start != tmpStartTime){
+                sort(orderedTasks, leftFlag, rightFlag, descriptions_sort);
+                leftFlag = rightFlag + 1;
                 tmpStartTime = orderedTasks[i].start;
-            else if(orderedTasks[i].start != tmpStartTime){
-                sort(tmpTasks, 0, tmpTasksCount - 1, descriptions_sort);
-                print_task_array_d_command(tmpTasks, tmpTasksCount);
-                tmpStartTime = orderedTasks[i].start;
-                tmpTasksCount = 0;
             }
-            tmpTasks[tmpTasksCount++] = orderedTasks[i];
+                rightFlag++;
         }
-        if (tmpTasksCount != 0){
-            sort(tmpTasks, 0, tmpTasksCount - 1, descriptions_sort);
-            print_task_array_d_command(tmpTasks, tmpTasksCount);
-        }
+        sort(orderedTasks, leftFlag, rightFlag, descriptions_sort);
+        print_task_array_d_command(orderedTasks, orderedTaskCount);
+
     } else 
         printf("no such activity\n");
 }
@@ -365,7 +363,7 @@ void list_tasks(){
     if(sscanf(input, "%d", &id) == 1){
         flag = strtok(input, " ");
         while(flag != NULL){
-            id = atoi(flag);
+            sscanf(flag, "%d", &id);
             if(id > 0 && id <= taskCount){
                 print_task_array_l_command(tasks, id - 1);
             } else 
