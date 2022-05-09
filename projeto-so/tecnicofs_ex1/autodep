@@ -1,0 +1,4 @@
+test2.o: tests/test2.c fs/operations.h fs/config.h fs/state.h
+test1.o: tests/test1.c fs/operations.h fs/config.h fs/state.h
+state.o: fs/state.c fs/state.h fs/config.h
+operations.o: fs/operations.c fs/operations.h fs/config.h fs/state.h

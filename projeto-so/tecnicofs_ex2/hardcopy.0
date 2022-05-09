@@ -1,0 +1,54 @@
+ f/tfs_server.c  2 c/tecnicofs_client_api.c  t/client_server_simple_test.c                                                                                   X
+   29     printf("mounting\n");
+   28     //create message to server
+   27     mes = realloc(mes, strlen(op_code));
+   26     if(mes == NULL)
+   25         exit(1);
+   24     memcpy(mes, op_code, strlen(op_code));
+   23     size_mes += strlen(op_code);
+   22
+   21     mes = realloc(mes, size_mes + strlen(SEPERATOR));
+   20     if(mes == NULL)
+   19         exit(1);
+   18     memcpy(mes + size_mes, SEPERATOR, strlen(SEPERATOR));
+   17     size_mes += strlen(SEPERATOR);
+   16
+   15     mes = realloc(mes, size_mes + strlen(client_pipe_path));
+   14     if(mes == NULL)
+   13         exit(1);
+   12     memcpy(mes + size_mes, client_pipe_path, strlen(client_pipe_path));
+   11     size_mes += strlen(client_pipe_path);
+   10
+    9     //create client pipe
+    8     unlink(client_pipe_path);
+    7     if (mkfifo(client_pipe_path, 0777) < 0)
+    6         exit(1);
+    5     //send message to server
+    4     if((pipe_handle_server = open(server_pipe_path, O_WRONLY)) < 0)
+    3         exit(1);
+    2     if(write(pipe_handle_server, mes, size_mes) != size_mes)
+    1         exit(1);
+>>49      print("asdfdaf");
+    1     //read response from server
+    2     if((pipe_handle_client = open(client_pipe_path, O_RDONLY)) < 0)
+    3         exit(1);
+    4     if((n = read(pipe_handle_client, &sension_id, sizeof(int)) != size_mes))
+    5         exit(1);
+    6     printf("finish mouting client\n");
+    7     return 0;
+    8 }
+    9
+   10 int tfs_unmount() {
+[Syntax: line:49 (1)]
+1   client/tecnicofs_client_api.c|49 col 5 warning| implicit declaration of function print; did you mean printf? [-Wimplicit-function-declaration]
+~
+~
+~
+~
+~
+~
+~
+~
+~
+[Location List] :SyntasticCheck gcc (c)                                                                                                    1,1             All
+"client/tecnicofs_client_api.c" 115L, 2981C written
