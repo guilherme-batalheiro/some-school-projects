@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Aplicação para BD - Flask</title>
+    <script src="{{url_for('static', filename='inserir_categoria.js')}}"></script>
+</head>
+    <h1>Projeto de BD</h1>
+    <h2>Inserir Categoria</h2>
+    <form id="form" action="insercao_de_categoria" method="post">
+        <p>Escreva o pai da categoria (se não tiver deixar em branco):</p>
+            <input type="text" name="pai_da_categoria">
+        <p>
+        <p>Escreva o nome da categoria:</p>
+            <input type="text" name="nome_da_categoria">
+        <div id="escolher_categoria">
+            <p>Escolha o tipo da categoria:</p>
+                <input id="categoria_simples_btn" type="radio" name="tipo_da_categoria" value="categoria_simples" checked="checked">
+                    <label>Categoria Simples</label><br>
+                <input onClick="foo()" id="super_categoria_btn" type="radio" name="tipo_da_categoria" value="super_categoria">
+                    <label>Super Categoria</label><br>
+            </div>
+            <input id="bottom" type="submit" value="Inserir Categoria">
+        </p>
+    </form>
+</body>
+</html>

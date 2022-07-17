@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Aplicação para BD - Flask</title>
+	</head>
+	<h1>Projeto de BD</h1>
+	<h2>Eventos de reposição da IVM {{num_serie}} do fabricante {{fabricante}}</h2>
+	<body style="padding:20px">
+		<table border="3">
+			<thead>
+				<tr>
+					<th>ean</th>
+					<th>nro</th>
+					<th>num_serie</th>
+					<th>fabricante</th>
+					<th>instante</th>
+					<th>unidades</th>
+					<th>tin</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				{% for record in eventos %}
+				<tr>
+					<td>{{record[0]}}</td>
+					<td>{{record[1]}}</td>
+					<td>{{record[2]}}</td>
+					<td>{{record[3]}}</td>
+					<td>{{record[4]}}</td>
+					<td>{{record[5]}}</td>
+					<td>{{record[6]}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+	<body style="padding:20px">
+		<table border="3">
+			<caption>Unidades repostas por categoria na IVM {{num_serie}} do fabricante {{fabricante}}</caption>
+			<thead>
+				<tr>
+					<th>categoria</th>
+					<th>unidades</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for record in cursor %}
+				<tr>
+					<td>{{record[0]}}</td>
+					<td>{{record[1]}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</table>
+	</body>
+</html>

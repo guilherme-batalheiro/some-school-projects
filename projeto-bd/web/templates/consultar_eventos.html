@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Aplicação para BD - Flask</title>
+</head>
+    <h1>Projeto de BD</h1>
+    <h2>Consultar eventos de reposição</h2>
+    <form action="executar_consulta_eventos" method="post">
+        <p>Identifique o fabricante da IVM cujos eventos quer consultar:</p>
+            <input type="text" name="fabricante">
+		<p>Identifique o número de série da IVM cujos eventos quer consultar:</p>
+            <input type="number"  min="0" value="1" name="num_serie">
+        <p><input type="submit" value="Consultar eventos de reposição"></p>
+    </form>
+</body>
+</html>
