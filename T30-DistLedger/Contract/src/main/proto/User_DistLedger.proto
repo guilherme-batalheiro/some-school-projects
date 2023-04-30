@@ -1,0 +1,42 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.distledger.contract.user;
+
+import "DistLedgerCommonDefinitions.proto";
+
+// User Interface of the DistLedger Service
+
+message BalanceRequest {
+  string userId = 1;
+  VectorClock prev = 2;
+}
+
+message BalanceResponse {
+  int32 value = 1;
+  VectorClock new = 2;
+}
+
+message CreateAccountRequest {
+  string userId = 1;
+  VectorClock prev = 2;
+}
+
+message CreateAccountResponse {
+  VectorClock new = 1;
+}
+
+message TransferToRequest {
+  string accountFrom = 1;
+  string accountTo = 2;
+  int32 amount = 3;
+  VectorClock prev = 4;
+}
+
+message TransferToResponse {
+  VectorClock new = 1;
+}
+
+service UserService {
+  rpc balance(BalanceRequest) returns (BalanceResponse);
+  rpc createAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc transferTo(TransferToRequest) returns (TransferToResponse);
+}

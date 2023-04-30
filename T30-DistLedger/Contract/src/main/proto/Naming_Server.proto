@@ -1,0 +1,42 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.distledger.contract;
+
+message ServerEntry {
+  string host = 1;
+  string port = 2;
+  string qualifier = 3;
+}
+
+message RegisterRequest {
+  string serviceName = 1;
+  string serverQualifier = 2;
+  string serverHost = 3;
+  string serverPort = 4;
+}
+
+message RegisterResponse { }
+
+message LookupRequest {
+  string serviceName = 1;
+  string serverQualifier = 2;
+}
+
+message LookupResponse {
+  repeated ServerEntry retrievedServers = 1;
+}
+
+message DeleteRequest {
+  string serviceName = 1;
+  string serverHost = 2;
+  string serverPort = 3;
+}
+
+message DeleteResponse { }
+
+service NamingServerService {
+  rpc register(RegisterRequest) returns (RegisterResponse);
+  rpc lookup(LookupRequest) returns (LookupResponse);
+  rpc delete(DeleteRequest) returns (DeleteResponse);
+}
+
+
